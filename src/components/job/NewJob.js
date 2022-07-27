@@ -34,7 +34,32 @@ const skills =[
 ]
 export default function NewJob() {
     const classes= useStyles();
-
+    function handleSubmit(e) {
+        e.preventDefault();
+    
+        const poemData = {
+          title,
+          author,
+          content,
+        };
+    
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(poemData),
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            onHandleAddPoem(data);
+    
+            // reset values to null
+            setTitle("");
+            setAuthor("");
+            setContent("");
+          });
+      }
 
   return (
     
