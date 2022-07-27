@@ -11,15 +11,16 @@ export default () => {
   const url = "http://localhost:3000/jobs";
   const [jobs, setJobs] = useState([]);
 
-  // const [poemArray, setPoemArray] = useState([]);
 
   // useEffect hook to get all the jobs and set it to state
   useEffect(() => {
     fetch(url)
       .then((r) => r.json())
-      .then((data) => setJobs(data));
+      .then((data) => setJobs(data)); 
   }, []);
-  console.log(jobs)
+  const jobList = jobs.map((jobs) => console.log(jobs))
+
+  // console.log(jobs)
   return (
    <ThemeProvider theme={theme}>
     <Header />
@@ -27,11 +28,9 @@ export default () => {
     <Grid container justifyContent="center">
     <Grid item xs={10}>
         <SearchBar/>
-        <JobCard/>
-        <JobCard/>
-        <JobCard/>
-        <JobCard/>
-
+        {/* {console.log(jobs)} */}
+        
+        <JobCard jobs={jobList} />
       </Grid>
       </Grid>
      </ThemeProvider>

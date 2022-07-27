@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme)=>(
     {
         wrapper: {
             border:" 1px solid #e8e8e8",
-            cursor:"pointer",
+            cursor:"pointer", 
             transition: ".3s",
 
             borderRadius : "5px",
@@ -39,11 +39,12 @@ const useStyles = makeStyles((theme)=>(
           },
     }))
 
-export default function JobCard() {
+export default function JobCard({jobs}) {
+    // console.log(jobs)
     const classes= useStyles();
   return (
     <Box p={2} className={classes.wrapper}>
-        <Grid container alignItems='center'>
+       { <Grid container alignItems='center'>
             <Grid item xs>
                 <Typography variant ="subtitle1">FronEnd Dev</Typography>
                 <Typography className={classes.companyName} variant ="subtitle2">Google</Typography>
@@ -71,7 +72,7 @@ export default function JobCard() {
 
             </Grid>
 
-        </Grid>
+        </Grid>}
     </Box>
   )
 }
