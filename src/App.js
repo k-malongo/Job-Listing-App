@@ -10,6 +10,8 @@ import NewJob from "./components/job/NewJob";
 export default () => {
   const url = "http://localhost:3000/jobs";
   const [jobs, setJobs] = useState([]);
+  const [open, setOpen] = useState(false)
+
 
 
   // useEffect hook to get all the jobs and set it to state
@@ -24,8 +26,8 @@ export default () => {
   }
   return (
    <ThemeProvider theme={theme}>
-    <Header />
-    <NewJob handleAddJob={handleAddJob} url={url}/>
+    <Header openNewJob={()=>setOpen(true)}/>
+    <NewJob handleAddJob={handleAddJob} url={url} open={open}/>
     <Grid container justifyContent="center">
     <Grid item xs={10}>
         <SearchBar/>

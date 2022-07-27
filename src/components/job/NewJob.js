@@ -43,7 +43,7 @@ const skills = [
   "MongoDb",
   "Express",
 ];
-export default function NewJob({ url, handleAddJob }) {
+export default function NewJob({ url, handleAddJob,open }) {
   const classes = useStyles();
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
@@ -76,11 +76,19 @@ export default function NewJob({ url, handleAddJob }) {
       .then((r) => r.json())
       .then((data) => {
         handleAddJob(data);
+
+        setTitle("")
+        setType("")
+        setCompany("")
+        setUrl("")
+        setDesc("")
+        setJob("")
+        setLocation("")
       });
   }
 
   return (
-    <Dialog open={false} fullWidth>
+    <Dialog open={open} fullWidth>
       <DialogTitle>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           Post Job
