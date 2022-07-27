@@ -18,13 +18,14 @@ export default () => {
       .then((r) => r.json())
       .then((data) => setJobs(data)); 
   }, []);
-  // const jobList = jobs.map((jobs) => console.log(jobs))
-
-  // console.log(jobs)
+  
+  function handleAddJob(newJob) {
+    setJobs([...jobs, newJob]);
+  }
   return (
    <ThemeProvider theme={theme}>
     <Header />
-    <NewJob/>
+    <NewJob handleAddJob={handleAddJob} url={url}/>
     <Grid container justifyContent="center">
     <Grid item xs={10}>
         <SearchBar/>

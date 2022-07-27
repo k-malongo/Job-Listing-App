@@ -43,7 +43,7 @@ const skills = [
   "MongoDb",
   "Express",
 ];
-export default function NewJob({ url }) {
+export default function NewJob({ url, handleAddJob }) {
   const classes = useStyles();
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
@@ -75,7 +75,7 @@ export default function NewJob({ url }) {
     })
       .then((r) => r.json())
       .then((data) => {
-        // onHandleAddPoem(data);
+        handleAddJob(data);
       });
   }
 
