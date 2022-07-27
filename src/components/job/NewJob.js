@@ -32,15 +32,20 @@ const skills =[
     "Express"
 
 ]
-export default function NewJob() {
+export default function NewJob({url}) {
     const classes= useStyles();
+
+    function handleChange(){
+
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
     
         const poemData = {
-          title,
-          author,
-          content,
+        //   title,
+        //   author,
+        //   content,
         };
     
         fetch(url, {
@@ -52,12 +57,8 @@ export default function NewJob() {
         })
           .then((r) => r.json())
           .then((data) => {
-            onHandleAddPoem(data);
+            // onHandleAddPoem(data);
     
-            // reset values to null
-            setTitle("");
-            setAuthor("");
-            setContent("");
           });
       }
 
@@ -74,12 +75,13 @@ export default function NewJob() {
             </Box>
         </DialogTitle>
         <DialogContent>
+            <form onSubmit={handleSubmit} id="myform">
             <Grid container spacing={2}>
                 <Grid item xs ={6}>
-                    <FilledInput placeholder=' Job title *' disableUnderline/>
+                    <FilledInput onChange={handleChange} placeholder=' Job title *' disableUnderline/>
                 </Grid>
                 <Grid item xs ={6}>
-                <Select fullWidth disableUnderline variant="filled" defaultValue ="Full Time">
+                <Select onChange={handleChange} fullWidth disableUnderline variant="filled" defaultValue ="Full Time">
                     <MenuItem value="Full Time"> Full time</MenuItem>
                     <MenuItem value="Part Time"> Part time</MenuItem>
                     <MenuItem value="Contract"> Contract </MenuItem>
@@ -87,24 +89,25 @@ export default function NewJob() {
                 </Select>
                 </Grid>
                 <Grid item xs ={6}>
-                    <FilledInput placeholder=' Company Name *' disableUnderline/>
+                    <FilledInput onChange={handleChange} placeholder=' Company Name *' disableUnderline/>
                 </Grid>
                 <Grid item xs ={6}>
-                <FilledInput placeholder=' Company URL *' disableUnderline/>
+                <FilledInput onChange={handleChange} placeholder=' Company URL *' disableUnderline/>
                
                 </Grid>
                 <Grid item xs ={6}>
-                <Select disableUnderline fullWidth variant="filled" defaultValue ="Remote">
+                <Select onChange={handleChange} disableUnderline fullWidth variant="filled" defaultValue ="Remote">
                     <MenuItem value="Remote"> Remote</MenuItem>
                      <MenuItem value="In Office"> In Office</MenuItem>
 
              </Select>
                 </Grid>
                 <Grid item xs ={6}>
-                    <FilledInput placeholder=' Job link *' disableUnderline/>
+                    <FilledInput onChange={handleChange} value="job" placeholder=' Job link *' disableUnderline/>
                 </Grid>
                 <Grid item xs ={12}>
                     <FilledInput 
+                    onChange={handleChange}
                     placeholder=' Job description *' 
                     fullWidth 
                     multiline 
@@ -118,11 +121,12 @@ export default function NewJob() {
 
                 ))}
             </Box>
+            </form>
         </DialogContent>
         <DialogActions>
             <Box color="red" width="100%" display="flex" justifyContent="space-between">
                 <Typography variant='caption'>*Required fields</Typography>
-                <Button variant='contained' disableElevation color='primary'>Post Job</Button>
+                <Button variant='contained' disableElevation color='primary' type="submit" form="myform">Post Job</Button>
             </Box>
         </DialogActions>
     </Dialog>
