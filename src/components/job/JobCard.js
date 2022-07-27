@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme)=>(
             backgroundColor: "gold",
             padding: theme.spacing(0.75),
             borderRadius : "5px",
-            width: "53px",
+            width: "60px",
             fontWeight:600,
           },
           skillChip:{
@@ -39,15 +39,15 @@ const useStyles = makeStyles((theme)=>(
           },
     }))
 
-export default function JobCard({jobs}) {
+export default function JobCard({id, company, jobtype}) {
     // console.log(jobs)
     const classes= useStyles();
   return (
-    <Box p={2} className={classes.wrapper}>
+    <Box p={2} className={classes.wrapper} key={id}>
        { <Grid container alignItems='center'>
             <Grid item xs>
-                <Typography variant ="subtitle1">FronEnd Dev</Typography>
-                <Typography className={classes.companyName} variant ="subtitle2">Google</Typography>
+                <Typography variant ="subtitle1">{jobtype}</Typography>
+                <Typography className={classes.companyName} variant ="subtitle2">{company}</Typography>
 
             </Grid>
             <Grid item container xs>

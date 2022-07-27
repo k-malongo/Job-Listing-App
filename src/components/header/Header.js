@@ -10,7 +10,7 @@ export default function Header() {
           <Typography variant="h5">Open Job Listing</Typography>
           <Typography variant="h5">Testimonials</Typography>
           <Button variant="contained" color="primary" >
-            Post a job
+            Post job
           </Button>
           </Box>
         </Grid>

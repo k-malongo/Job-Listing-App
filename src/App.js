@@ -14,11 +14,11 @@ export default () => {
 
   // useEffect hook to get all the jobs and set it to state
   useEffect(() => {
-    fetch(url)
+    fetch(url) 
       .then((r) => r.json())
       .then((data) => setJobs(data)); 
   }, []);
-  const jobList = jobs.map((jobs) => console.log(jobs))
+  // const jobList = jobs.map((jobs) => console.log(jobs))
 
   // console.log(jobs)
   return (
@@ -30,7 +30,8 @@ export default () => {
         <SearchBar/>
         {/* {console.log(jobs)} */}
         
-        <JobCard jobs={jobList} />
+       { jobs.map((jobs) => 
+       <JobCard id={jobs.id} company={jobs.company} key= {jobs.id} jobtype={jobs.job_type}/>)}
       </Grid>
       </Grid>
      </ThemeProvider>
