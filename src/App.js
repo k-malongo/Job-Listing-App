@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from "react";
-import { Box, Grid,Typography } from "@material-ui/core";
+import {  Grid } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import theme from "./theme/theme"
 import Header from "./components/header/Header";

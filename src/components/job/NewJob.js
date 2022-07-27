@@ -1,135 +1,196 @@
-import React from 'react'
-import { Box,Grid, IconButton,FilledInput,makeStyles, Button, Select, MenuItem, Dialog, DialogTitle, DialogContent,DialogActions, Typography } from '@material-ui/core'
-import {Close as CloseIcon} from "@material-ui/icons"
-const useStyles = makeStyles((theme)=>(
-    {
-        skillChip:{
-            margin: theme.spacing(0.5),
-            padding: theme.spacing(0.75),
-            fontSize: "14.5px",
-            borderRadius: "5px",
-            // transition: ".3s",
-            fontWeight:600,
-            // backgroundColor: "lightblue",
-            border: `1px solid ${theme.palette.secondary.main}`,
-            color: theme.palette.secondary.main,
-            cursor:"pointer",
-            "&:hover":{
-                backgroundColor: theme.palette.secondary.main,
-            color: "#fff"
-                
-            }
-          },
-    })) 
+import React, { useState } from "react";
+import {
+  Box,
+  Grid,
+  IconButton,
+  FilledInput,
+  makeStyles,
+  Button,
+  Select,
+  MenuItem,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Typography,
+} from "@material-ui/core";
+import { Close as CloseIcon } from "@material-ui/icons";
+const useStyles = makeStyles((theme) => ({
+  skillChip: {
+    margin: theme.spacing(0.5),
+    padding: theme.spacing(0.75),
+    fontSize: "14.5px",
+    borderRadius: "5px",
+    // transition: ".3s",
+    fontWeight: 600,
+    // backgroundColor: "lightblue",
+    border: `1px solid ${theme.palette.secondary.main}`,
+    color: theme.palette.secondary.main,
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      color: "#fff",
+    },
+  },
+}));
 
-const skills =[
-    "Javascript",
-    "React",
-    "vue",
-    "firebase",
-    "Node",
-    "MongoDb",
-    "Express"
+const skills = [
+  "Javascript",
+  "React",
+  "vue",
+  "firebase",
+  "Node",
+  "MongoDb",
+  "Express",
+];
+export default function NewJob({ url }) {
+  const classes = useStyles();
+  const [title, setTitle] = useState("");
+  const [type, setType] = useState("");
+  const [company, setCompany] = useState("");
+  const [companyurl, setUrl] = useState("");
+  const [desc, setDesc] = useState("");
+  const [job, setJob] = useState("");
+  const [location, setLocation] = useState("");
 
-]
-export default function NewJob({url}) {
-    const classes= useStyles();
+  function handleSubmit(e) {
+    e.preventDefault();
 
-    function handleChange(){
+    const jobData = {
+      title,
+      type,
+      company,
+      companyurl,
+      desc,
+      job,
+      location,
+    };
 
-    }
-
-    function handleSubmit(e) {
-        e.preventDefault();
-    
-        const poemData = {
-        //   title,
-        //   author,
-        //   content,
-        };
-    
-        fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(poemData),
-        })
-          .then((r) => r.json())
-          .then((data) => {
-            // onHandleAddPoem(data);
-    
-          });
-      }
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(jobData),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        // onHandleAddPoem(data);
+      });
+  }
 
   return (
-    
     <Dialog open={false} fullWidth>
-        <DialogTitle>
-            <Box display="flex" justifyContent="space-between" alignItems="center">
-            Post Job
-            <IconButton>
-                
-                <CloseIcon />
-            </IconButton>
-            </Box>
-        </DialogTitle>
-        <DialogContent>
-            <form onSubmit={handleSubmit} id="myform">
-            <Grid container spacing={2}>
-                <Grid item xs ={6}>
-                    <FilledInput onChange={handleChange} placeholder=' Job title *' disableUnderline/>
-                </Grid>
-                <Grid item xs ={6}>
-                <Select onChange={handleChange} fullWidth disableUnderline variant="filled" defaultValue ="Full Time">
-                    <MenuItem value="Full Time"> Full time</MenuItem>
-                    <MenuItem value="Part Time"> Part time</MenuItem>
-                    <MenuItem value="Contract"> Contract </MenuItem>
-
-                </Select>
-                </Grid>
-                <Grid item xs ={6}>
-                    <FilledInput onChange={handleChange} placeholder=' Company Name *' disableUnderline/>
-                </Grid>
-                <Grid item xs ={6}>
-                <FilledInput onChange={handleChange} placeholder=' Company URL *' disableUnderline/>
-               
-                </Grid>
-                <Grid item xs ={6}>
-                <Select onChange={handleChange} disableUnderline fullWidth variant="filled" defaultValue ="Remote">
-                    <MenuItem value="Remote"> Remote</MenuItem>
-                     <MenuItem value="In Office"> In Office</MenuItem>
-
-             </Select>
-                </Grid>
-                <Grid item xs ={6}>
-                    <FilledInput onChange={handleChange} value="job" placeholder=' Job link *' disableUnderline/>
-                </Grid>
-                <Grid item xs ={12}>
-                    <FilledInput 
-                    onChange={handleChange}
-                    placeholder=' Job description *' 
-                    fullWidth 
-                    multiline 
-                    rows={3} 
-                    disableUnderline/>
-                </Grid>
+      <DialogTitle>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          Post Job
+          <IconButton>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+      </DialogTitle>
+      <DialogContent>
+        <form onSubmit={handleSubmit} id="myform">
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <FilledInput
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder=" Job title *"
+                disableUnderline
+              />
             </Grid>
-            <Box display="flex" >
-                {skills.map((skill) => (
-                    <Box  className={classes.skillChip} key = {skill}>{skill}</Box>
-
-                ))}
-            </Box>
-            </form>
-        </DialogContent>
-        <DialogActions>
-            <Box color="red" width="100%" display="flex" justifyContent="space-between">
-                <Typography variant='caption'>*Required fields</Typography>
-                <Button variant='contained' disableElevation color='primary' type="submit" form="myform">Post Job</Button>
-            </Box>
-        </DialogActions>
+            <Grid item xs={6}>
+              <Select
+                onChange={(e) => setType(e.target.value)}
+                value={type}
+                fullWidth
+                disableUnderline
+                variant="filled"
+                defaultValue="Full Time"
+              >
+                <MenuItem value="Full Time"> Full time</MenuItem>
+                <MenuItem value="Part Time"> Part time</MenuItem>
+                <MenuItem value="Contract"> Contract </MenuItem>
+              </Select>
+            </Grid>
+            <Grid item xs={6}>
+              <FilledInput
+                onChange={(e) => setCompany(e.target.value)}
+                value={company}
+                placeholder=" Company Name *"
+                disableUnderline
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <FilledInput
+                onChange={(e) => setUrl(e.target.value)}
+                value={companyurl}
+                placeholder=" Company URL *"
+                disableUnderline
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Select
+                onChange={(e) => setLocation(e.target.value)}
+                value={location}
+                disableUnderline
+                fullWidth
+                variant="filled"
+                defaultValue="Remote"
+              >
+                <MenuItem value="Remote"> Remote</MenuItem>
+                <MenuItem value="In Office"> In Office</MenuItem>
+              </Select>
+            </Grid>
+            <Grid item xs={6}>
+              <FilledInput
+                onChange={(e) => setJob(e.target.value)}
+                value={job}
+                placeholder=" Job link *"
+                disableUnderline
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FilledInput
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+                placeholder=" Job description *"
+                fullWidth
+                multiline
+                rows={3}
+                disableUnderline
+              />
+            </Grid>
+          </Grid>
+          <Box display="flex">
+            {skills.map((skill) => (
+              <Box className={classes.skillChip} key={skill}>
+                {skill}
+              </Box>
+            ))}
+          </Box>
+        </form>
+      </DialogContent>
+      <DialogActions>
+        <Box
+          color="red"
+          width="100%"
+          display="flex"
+          justifyContent="space-between"
+        >
+          <Typography variant="caption">*Required fields</Typography>
+          <Button
+            variant="contained"
+            disableElevation
+            color="primary"
+            type="submit"
+            form="myform"
+          >
+            Post Job
+          </Button>
+        </Box>
+      </DialogActions>
     </Dialog>
-
-  )
+  );
 }
