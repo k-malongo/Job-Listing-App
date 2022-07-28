@@ -33,12 +33,12 @@ export default () => {
     <ThemeProvider theme={theme}>
       <Header openNewJob={() => setOpen(true)} />
 
-      {/* <Routes> */}
+      <Routes>
 
-      {/* <Route exact path ='/'>
+      <Route exact path ='/'>
        <Homepage />
-       </Route> */}
-      {/* <Route exact path ='/newjobs'> */}
+       </Route>
+      <Route exact path ='/newjobs'>
       <NewJob
         closeJob={() => setOpen(false)}
         handleAddJob={handleAddJob}
@@ -50,11 +50,11 @@ export default () => {
         <ViewJob open={check} closeJob={() => setCheck(false)}  />
      
 
-      {/* </Route> */}
+      </Route>
       <Grid container justifyContent="center">
         <Grid item xs={10}>
           <SearchBar />
-          {/* <Route exact path ='/jobs'>  */}
+          <Route exact path ='/jobs'> 
           {jobs.map((jobs) => (
             <JobCard
               id={jobs.id}
@@ -66,10 +66,10 @@ export default () => {
               // checkJob={() => setCheck(true)}
             />
           ))}
-          {/* </Route> */}
+          </Route>
         </Grid>
       </Grid>
-      {/* </Routes> */}
+      </Routes>
     </ThemeProvider>
   );
 };
