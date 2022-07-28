@@ -12,6 +12,8 @@ import ViewJob from "./components/job/ViewJob";
 
 export default () => {
   const url = "https://jbap.herokuapp.com/jobs";
+  // const url = "https://jbap.herokuapp.com/jobs";
+
   const [jobs, setJobs] = useState([]);
   const [open, setOpen] = useState(false);
   const [viewJob, setViewJob] = useState({});
@@ -44,9 +46,9 @@ export default () => {
         open={open}
       />
 
-      {jobs.map((jobs) => (
-        <ViewJob open={check} closeJob={() => setCheck(false)} desc={jobs.desc} />
-      ))}
+      {/* {jobs.map((jobs) => ( */}
+        <ViewJob open={check} closeJob={() => setCheck(false)}  />
+     
 
       {/* </Route> */}
       <Grid container justifyContent="center">
@@ -61,7 +63,7 @@ export default () => {
               jobtype={jobs.job_type}
               skills={jobs.requirement}
               time={jobs.type}
-              checkJob={() => setCheck(true)}
+              // checkJob={() => setCheck(true)}
             />
           ))}
           {/* </Route> */}

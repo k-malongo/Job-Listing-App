@@ -8,10 +8,10 @@ export default function Header({ openNewJob }) {
       <Grid container justifyContent="center">
         <Grid item xs={10}>
           <Box display="flex" justifyContent="space-between">
-            <Typography variant="h5">
+            {/* <Typography variant="h5"> */}
               {/* <NavLink to="/">Home</NavLink> */}
-              Home
-            </Typography>
+              {/* Home */}
+            {/* </Typography> */}
             <Typography variant="h5">
               {/* <NavLink to="/jobs">Open Job Listing</NavLink> */}
               Open Job Listing
