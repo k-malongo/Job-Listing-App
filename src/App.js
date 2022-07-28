@@ -8,9 +8,10 @@ import JobCard from "./components/job/JobCard";
 import NewJob from "./components/job/NewJob";
 import {Route, Routes} from 'react-router-dom'
 import Homepage from "./components/homepage/Homepage";
+import ViewJob from "./components/job/ViewJob"
 
 export default () => {
-  const url = "http://localhost:3000/jobs";
+  const url = "https://jbap.herokuapp.com/jobs";
   const [jobs, setJobs] = useState([]);
   const [open, setOpen] = useState(false)
 
@@ -38,6 +39,7 @@ export default () => {
        </Route> */}
        {/* <Route exact path ='/newjobs'> */}
     <NewJob closeJob={()=>setOpen(false)} handleAddJob={handleAddJob} url={url} open={open}/>
+    <ViewJob/>
     {/* </Route> */}
     <Grid container justifyContent="center">
     <Grid item xs={10}>

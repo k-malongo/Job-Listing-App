@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme)=>(
             backgroundColor: "gold",
             padding: theme.spacing(0.75),
             borderRadius : "5px",
-            width: "60px",
+            // width: "60px",
             fontWeight:600,
           },
           skillChip:{

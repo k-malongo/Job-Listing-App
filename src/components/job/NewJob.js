@@ -52,6 +52,9 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
   const [description, setDesc] = useState("");
   const [job, setJob] = useState("");
   const [location, setLocation] = useState("");
+  const [skillss, setSkills] = useState([]);
+  const [old, setOld]=useState()
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -64,6 +67,7 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
       description,
       job,
       location,
+      skillss,
     };
 
     fetch(url, {
@@ -87,6 +91,14 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
       });
   }
 
+  // const addRemoveSkill=(skill)=>
+  //   skillss.includes(skill)
+  //   ?setSkills
+  //   //removing
+
+  //   :
+
+  
   return (
     <Dialog open={open} fullWidth>
       <DialogTitle>
@@ -163,21 +175,31 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
               <FilledInput
                 value={description}
                 onChange={(e) => setDesc(e.target.value)}
-                placeholder=" Job description *"
+                placeholder=" skill1 *"
                 fullWidth
                 multiline
                 rows={3}
                 disableUnderline
               />
             </Grid>
+            <Grid item xs={6}>
+              <FilledInput
+                onChange={(e) => setCompany(e.target.value)}
+                value={skillss}
+                placeholder=" skill2 *"
+                disableUnderline
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <FilledInput
+                onChange={(e) => setUrl(e.target.value)}
+                value={skillss}
+                placeholder=" Company URL *"
+                disableUnderline
+              />
+            </Grid>
           </Grid>
-          <Box display="flex">
-            {skills.map((skill) => (
-              <Box className={classes.skillChip} key={skill}>
-                {skill}
-              </Box>
-            ))}
-          </Box>
+         
         </form>
       </DialogContent>
       <DialogActions>
@@ -202,3 +224,18 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
     </Dialog>
   );
 }
+
+// {skills.map((skill) => (
+//   <Box className={classes.skillChip} 
+//   key={skill }>
+//     {/* value={skillss}
+//     onChange={(e) => setSkills(e.target.value)} */}
+//     {skill
+//     value={skillss}
+//     onChange={(e) => setSkills(e.target.value)}
+//     }
+//   </Box>
+// ))}
+{/* <Box display="flex">
+          
+</Box> */}
