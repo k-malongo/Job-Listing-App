@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme)=>(
             backgroundColor: "gold",
             padding: theme.spacing(0.75),
             borderRadius : "5px",
-            // width: "60px",
+            width: "70px",
             fontWeight:600,
           },
           skillChip:{
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme)=>(
           },
     }))
 
-export default function JobCard({id, company, jobtype, time}) {
+export default function JobCard({id, company, jobtype, time, checkJob}) {
     // console.log(jobs)
     const classes= useStyles();
   return (
@@ -64,7 +64,7 @@ export default function JobCard({id, company, jobtype, time}) {
                 </Grid>
                 <Grid item>
                     <Box mt={2}>
-                    <Button variant= "outlined">
+                    <Button variant= "outlined" onClick={checkJob}>
                         Check
                     </Button>
                     </Box>

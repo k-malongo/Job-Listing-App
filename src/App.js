@@ -1,58 +1,73 @@
-import React,{useState, useEffect} from "react";
-import {  Grid } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Grid } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
-import theme from "./theme/theme"
+import theme from "./theme/theme";
 import Header from "./components/header/Header";
-import SearchBar from "./components/searchBar/searchBar"
+import SearchBar from "./components/searchBar/searchBar";
 import JobCard from "./components/job/JobCard";
 import NewJob from "./components/job/NewJob";
-import {Route, Routes} from 'react-router-dom'
+import { Route, Routes } from "react-router-dom";
 import Homepage from "./components/homepage/Homepage";
-import ViewJob from "./components/job/ViewJob"
+import ViewJob from "./components/job/ViewJob";
 
 export default () => {
   const url = "https://jbap.herokuapp.com/jobs";
   const [jobs, setJobs] = useState([]);
-  const [open, setOpen] = useState(false)
-
-
+  const [open, setOpen] = useState(false);
+  const [viewJob, setViewJob] = useState({});
+  const [check, setCheck] = useState(false);
 
   // useEffect hook to get all the jobs and set it to state
   useEffect(() => {
-    fetch(url) 
+    fetch(url)
       .then((r) => r.json())
-      .then((data) => setJobs(data)); 
+      .then((data) => setJobs(data));
   }, []);
-  
+
   function handleAddJob(newJob) {
     setJobs([...jobs, newJob]);
   }
   return (
+    <ThemeProvider theme={theme}>
+      <Header openNewJob={() => setOpen(true)} />
 
-   <ThemeProvider theme={theme}>
-    <Header openNewJob={()=>setOpen(true)}/>
+      {/* <Routes> */}
 
-    {/* <Routes> */}
-
-    {/* <Route exact path ='/'>
+      {/* <Route exact path ='/'>
        <Homepage />
        </Route> */}
-       {/* <Route exact path ='/newjobs'> */}
-    <NewJob closeJob={()=>setOpen(false)} handleAddJob={handleAddJob} url={url} open={open}/>
-    <ViewJob/>
-    {/* </Route> */}
-    <Grid container justifyContent="center">
-    <Grid item xs={10}>
+      {/* <Route exact path ='/newjobs'> */}
+      <NewJob
+        closeJob={() => setOpen(false)}
+        handleAddJob={handleAddJob}
+        url={url}
+        open={open}
+      />
 
-        <SearchBar/>
-       {/* <Route exact path ='/jobs'>  */}
-       { jobs.map((jobs) => 
-       <JobCard id={jobs.id} company={jobs.company} key= {jobs.id} jobtype={jobs.job_type} skills={jobs.requirement} time={jobs.type} />)}
-       {/* </Route> */}
-      </Grid>
+      {jobs.map((jobs) => (
+        <ViewJob open={check} closeJob={() => setCheck(false)} desc={jobs.desc} />
+      ))}
+
+      {/* </Route> */}
+      <Grid container justifyContent="center">
+        <Grid item xs={10}>
+          <SearchBar />
+          {/* <Route exact path ='/jobs'>  */}
+          {jobs.map((jobs) => (
+            <JobCard
+              id={jobs.id}
+              company={jobs.company}
+              key={jobs.id}
+              jobtype={jobs.job_type}
+              skills={jobs.requirement}
+              time={jobs.type}
+              checkJob={() => setCheck(true)}
+            />
+          ))}
+          {/* </Route> */}
+        </Grid>
       </Grid>
       {/* </Routes> */}
-     </ThemeProvider>
-
-  )
+    </ThemeProvider>
+  );
 };

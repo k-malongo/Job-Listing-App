@@ -16,14 +16,14 @@ import {
   } from "@material-ui/core";
 import { Close as CloseIcon } from "@material-ui/icons";
 
-export default function ViewJob() {
+export default function ViewJob({open, closeJob}) {
   return (
-    <Dialog open={true}>
+    <Dialog open={open} fullWidth>
     <DialogTitle>
     <Box display="flex" justifyContent="space-between" alignItems="center">
-      Post Job
+      More Details
       <IconButton>
-        <CloseIcon />
+        <CloseIcon onClick={closeJob}/>
       </IconButton>
     </Box>
   </DialogTitle>
