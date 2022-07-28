@@ -43,13 +43,13 @@ const skills = [
   "MongoDb",
   "Express",
 ];
-export default function NewJob({ url, handleAddJob,open }) {
+export default function NewJob({ url, handleAddJob,open,closeJob}) {
   const classes = useStyles();
-  const [title, setTitle] = useState("");
+  const [job_type, setTitle] = useState("");
   const [type, setType] = useState("");
   const [company, setCompany] = useState("");
   const [companyurl, setUrl] = useState("");
-  const [desc, setDesc] = useState("");
+  const [description, setDesc] = useState("");
   const [job, setJob] = useState("");
   const [location, setLocation] = useState("");
 
@@ -57,11 +57,11 @@ export default function NewJob({ url, handleAddJob,open }) {
     e.preventDefault();
 
     const jobData = {
-      title,
+      job_type,
       type,
       company,
       companyurl,
-      desc,
+      description,
       job,
       location,
     };
@@ -93,7 +93,7 @@ export default function NewJob({ url, handleAddJob,open }) {
         <Box display="flex" justifyContent="space-between" alignItems="center">
           Post Job
           <IconButton>
-            <CloseIcon />
+            <CloseIcon onClick={closeJob}/>
           </IconButton>
         </Box>
       </DialogTitle>
@@ -102,7 +102,7 @@ export default function NewJob({ url, handleAddJob,open }) {
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <FilledInput
-                value={title}
+                value={job_type}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder=" Job title *"
                 disableUnderline
@@ -161,7 +161,7 @@ export default function NewJob({ url, handleAddJob,open }) {
             </Grid>
             <Grid item xs={12}>
               <FilledInput
-                value={desc}
+                value={description}
                 onChange={(e) => setDesc(e.target.value)}
                 placeholder=" Job description *"
                 fullWidth

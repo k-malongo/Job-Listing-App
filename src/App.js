@@ -6,6 +6,8 @@ import Header from "./components/header/Header";
 import SearchBar from "./components/searchBar/searchBar"
 import JobCard from "./components/job/JobCard";
 import NewJob from "./components/job/NewJob";
+import {Route, Routes} from 'react-router-dom'
+import Homepage from "./components/homepage/Homepage";
 
 export default () => {
   const url = "http://localhost:3000/jobs";
@@ -25,18 +27,29 @@ export default () => {
     setJobs([...jobs, newJob]);
   }
   return (
+
    <ThemeProvider theme={theme}>
     <Header openNewJob={()=>setOpen(true)}/>
-    <NewJob handleAddJob={handleAddJob} url={url} open={open}/>
+
+    {/* <Routes> */}
+
+    {/* <Route exact path ='/'>
+       <Homepage />
+       </Route> */}
+       {/* <Route exact path ='/newjobs'> */}
+    <NewJob closeJob={()=>setOpen(false)} handleAddJob={handleAddJob} url={url} open={open}/>
+    {/* </Route> */}
     <Grid container justifyContent="center">
     <Grid item xs={10}>
+
         <SearchBar/>
-        {/* {console.log(jobs)} */}
-        
+       {/* <Route exact path ='/jobs'>  */}
        { jobs.map((jobs) => 
-       <JobCard id={jobs.id} company={jobs.company} key= {jobs.id} jobtype={jobs.job_type}/>)}
+       <JobCard id={jobs.id} company={jobs.company} key= {jobs.id} jobtype={jobs.job_type} skills={jobs.requirement} time={jobs.type} />)}
+       {/* </Route> */}
       </Grid>
       </Grid>
+      {/* </Routes> */}
      </ThemeProvider>
 
   )

@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme)=>(
           },
     }))
 
-export default function JobCard({id, company, jobtype}) {
+export default function JobCard({id, company, jobtype, time}) {
     // console.log(jobs)
     const classes= useStyles();
   return (
@@ -58,7 +58,7 @@ export default function JobCard({id, company, jobtype}) {
             <Grid item container direction='column' color="white" alignItems='flex-end' xs>
                 <Grid item>
                 <Typography variant ="caption">
-                    2577 min ago | Fulltime | Remote
+                    | {time} | Remote
                 </Typography>
 
                 </Grid>
