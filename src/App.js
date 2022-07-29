@@ -36,6 +36,10 @@ export default () => {
     setJobs(itemsSearch)
     console.log(jobs)
 }
+function deleteJob(id) {
+  const updatedJob = jobs.filter((job) => job.id !== id);
+  setJobs(updatedJob);
+}
   return (
     <ThemeProvider theme={theme}>
       <Header openNewJob={() => setOpen(true)} />
@@ -70,6 +74,7 @@ export default () => {
               jobtype={jobs.job_type}
               skills={jobs.requirement}
               time={jobs.type}
+              handleDelete={deleteJob}
               // checkJob={() => setCheck(true)}
             />
           ))}

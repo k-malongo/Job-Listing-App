@@ -37,12 +37,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function JobCard({ id, company, jobtype, time, checkJob }) {
+export default function JobCard({ id, company, jobtype, time, handleDelete }) {
   const [check, setCheck] = useState(false);
 
   function viewJobInfo() {
     setCheck(!check);
     return <ViewJob check={check} />;
+  }
+  function handleDeleteClick() {
+    console.log(id);
+    fetch(`https://jbap.herokuapp.com/jobs/${id}`, {
+      method: "DELETE",
+    })
+      .then((r) => r.json())
+      .then(() => handleDelete(id));
   }
   const classes = useStyles();
   return (
@@ -79,7 +87,7 @@ export default function JobCard({ id, company, jobtype, time, checkJob }) {
                   variant="outlined"
                   onClick={() => <ViewJob check={true} />}
                 >
-                  Check
+                  Delete
                 </Button>
               </Box>
             </Grid>
