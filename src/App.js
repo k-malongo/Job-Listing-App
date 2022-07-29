@@ -16,7 +16,7 @@ export default () => {
 
   const [jobs, setJobs] = useState([]);
   const [open, setOpen] = useState(false);
-  const [viewJob, setViewJob] = useState({});
+  const [viewJob, setViewJob] = useState([]);
   const [check, setCheck] = useState(false);
 
   // useEffect hook to get all the jobs and set it to state
@@ -29,6 +29,13 @@ export default () => {
   function handleAddJob(newJob) {
     setJobs([...jobs, newJob]);
   }
+  function searchFunction(searchValue) {
+    const itemsSearch = viewJob.filter((item) => item.job_type.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.company.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setJobs(itemsSearch)
+    console.log(jobs)
+}
   return (
     <ThemeProvider theme={theme}>
       <Header openNewJob={() => setOpen(true)} />

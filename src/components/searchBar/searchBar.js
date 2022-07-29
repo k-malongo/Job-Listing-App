@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, MenuItem,Select, makeStyles } from '@material-ui/core'
+import { Box, Button, MenuItem,Select, makeStyles, FilledInput } from '@material-ui/core'
 
  const useStyles =  makeStyles(
   {
@@ -16,12 +16,17 @@ import { Box, Button, MenuItem,Select, makeStyles } from '@material-ui/core'
     }
   }
 )
-export default function SearchBar() {
+export default function SearchBar({searchFunction}) {
   const classes = useStyles()
   return (
     <Box p={2} mt={-5} mb={2} className={classes.wrapper} >
+
+      <FilledInput 
+      placeholder='Search for job'
+      onChange={(e)=> searchFunction(e.target.value)}
+      />
         
-        <Select disableUnderline variant="filled" defaultValue ="Full Time">
+        {/* <Select disableUnderline variant="filled" defaultValue ="Full Time">
             <MenuItem value="Full Time"> Full time</MenuItem>
             <MenuItem value="Part Time"> Part time</MenuItem>
             <MenuItem value="Contract"> Contract </MenuItem>
@@ -34,7 +39,7 @@ export default function SearchBar() {
         </Select>
         <Button variant="contained" color="primary" >
             Filter
-          </Button>
+          </Button> */}
     </Box>
   )
 }
