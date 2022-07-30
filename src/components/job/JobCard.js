@@ -59,11 +59,7 @@ export default function JobCard({ id, company, jobtype, time, handleDelete, sala
             </Typography>
           </Grid>
           <Grid item container xs>
-            {/* {skills.map((skill) => (
-              <Grid className={classes.skillChip} key={skill} item>
-                {skill}
-              </Grid>
-            ))} */}
+          
                  <Box
         component="img"
         sx={{
