@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
 const skills = [
   "Javascript",
   "React",
@@ -43,34 +42,30 @@ const skills = [
   "MongoDb",
   "Express",
 ];
-export default function NewJob({ url, handleAddJob,open,closeJob}) {
+export default function NewJob({ urll, handleAddJob,open,closeJob}) {
   const classes = useStyles();
   const [job_type, setTitle] = useState("");
-  const [type, setType] = useState("");
+  const [salary, setType] = useState("");
   const [company, setCompany] = useState("");
-  const [companyurl, setUrl] = useState("");
+  const [url, setUrl] = useState("");
   const [description, setDesc] = useState("");
-  const [job, setJob] = useState("");
+  const [image, setJob] = useState("");
   const [location, setLocation] = useState("");
   const [skillss, setSkills] = useState([]);
   const [old, setOld]=useState()
-
-
   function handleSubmit(e) {
     e.preventDefault();
-
     const jobData = {
       job_type,
-      type,
+      salary,
       company,
-      companyurl,
+      url,
       description,
-      job,
+      image,
       location,
       skillss,
     };
-
-    fetch(url, {
+    fetch(urll, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +75,6 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
       .then((r) => r.json())
       .then((data) => {
         handleAddJob(data);
-
         setTitle("")
         setType("")
         setCompany("")
@@ -90,15 +84,6 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
         setLocation("")
       });
   }
-
-  // const addRemoveSkill=(skill)=>
-  //   skillss.includes(skill)
-  //   ?setSkills
-  //   //removing
-
-  //   :
-
-  
   return (
     <Dialog open={open} fullWidth>
       <DialogTitle>
@@ -121,7 +106,7 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
               />
             </Grid>
             <Grid item xs={6}>
-              <Select
+              {/* <Select
                 onChange={(e) => setType(e.target.value)}
                 value={type}
                 fullWidth
@@ -132,7 +117,13 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
                 <MenuItem value="Full Time"> Full time</MenuItem>
                 <MenuItem value="Part Time"> Part time</MenuItem>
                 <MenuItem value="Contract"> Contract </MenuItem>
-              </Select>
+              </Select> */}
+               <FilledInput
+                onChange={(e) => setType(e.target.value)}
+                value={salary}
+                placeholder="  Pay per year $ *"
+                disableUnderline
+              />
             </Grid>
             <Grid item xs={6}>
               <FilledInput
@@ -145,8 +136,8 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
             <Grid item xs={6}>
               <FilledInput
                 onChange={(e) => setUrl(e.target.value)}
-                value={companyurl}
-                placeholder=" Company URL *"
+                value={url}
+                placeholder=" Job URL *"
                 disableUnderline
               />
             </Grid>
@@ -166,8 +157,8 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
             <Grid item xs={6}>
               <FilledInput
                 onChange={(e) => setJob(e.target.value)}
-                value={job}
-                placeholder=" Job link *"
+                value={image}
+                placeholder=" image link *"
                 disableUnderline
               />
             </Grid>
@@ -175,31 +166,14 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
               <FilledInput
                 value={description}
                 onChange={(e) => setDesc(e.target.value)}
-                placeholder=" skill1 *"
+                placeholder=" description *"
                 fullWidth
                 multiline
                 rows={3}
                 disableUnderline
               />
             </Grid>
-            <Grid item xs={6}>
-              <FilledInput
-                onChange={(e) => setCompany(e.target.value)}
-                value={skillss}
-                placeholder=" skill2 *"
-                disableUnderline
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <FilledInput
-                onChange={(e) => setUrl(e.target.value)}
-                value={skillss}
-                placeholder=" Company URL *"
-                disableUnderline
-              />
-            </Grid>
           </Grid>
-         
         </form>
       </DialogContent>
       <DialogActions>
@@ -224,9 +198,8 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
     </Dialog>
   );
 }
-
 // {skills.map((skill) => (
-//   <Box className={classes.skillChip} 
+//   <Box className={classes.skillChip}
 //   key={skill }>
 //     {/* value={skillss}
 //     onChange={(e) => setSkills(e.target.value)} */}
@@ -237,5 +210,4 @@ export default function NewJob({ url, handleAddJob,open,closeJob}) {
 //   </Box>
 // ))}
 {/* <Box display="flex">
-          
 </Box> */}

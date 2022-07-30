@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Box, Grid, Typography, Button, makeStyles } from "@material-ui/core";
 import ViewJob from "./ViewJob";
-
+// or
+// import { CardMedia } from '@mui/material/core';
 const skills = ["Javascript", "React.js", "Node.js"];
-
+var skill = skills[Math.floor(Math.random() * skills.length)];
 const useStyles = makeStyles((theme) => ({
   wrapper: {
-    border: " 1px solid #e8e8e8",
+    border: " 1px solid #E8E8E8",
     cursor: "pointer",
     transition: ".3s",
-
     borderRadius: "5px",
     "&:hover": {
       boxShadow: "0px 5px 25px rgba(0, 0, 0, 0.1)",
@@ -36,14 +36,10 @@ const useStyles = makeStyles((theme) => ({
     // color: "fff"
   },
 }));
-
-export default function JobCard({ id, company, jobtype, time, handleDelete }) {
+export default function JobCard({ id, company, jobtype, time, handleDelete, salary, location, url, image }) {
   const [check, setCheck] = useState(false);
-
-  function viewJobInfo() {
-    setCheck(!check);
-    return <ViewJob check={check} />;
-  }
+  console.log(skill)
+  const classes = useStyles();
   function handleDeleteClick() {
     console.log(id);
     fetch(`https://jbap.herokuapp.com/jobs/${id}`, {
@@ -52,7 +48,6 @@ export default function JobCard({ id, company, jobtype, time, handleDelete }) {
       .then((r) => r.json())
       .then(() => handleDelete(id));
   }
-  const classes = useStyles();
   return (
     <Box p={2} className={classes.wrapper} key={id}>
       {
@@ -64,11 +59,23 @@ export default function JobCard({ id, company, jobtype, time, handleDelete }) {
             </Typography>
           </Grid>
           <Grid item container xs>
-            {skills.map((skill) => (
+            {/* {skills.map((skill) => (
               <Grid className={classes.skillChip} key={skill} item>
                 {skill}
               </Grid>
-            ))}
+            ))} */}
+                 <Box
+        component="img"
+        sx={{
+          height: 100,
+          width: 150,
+          maxHeight: { xs: 120, md: 167 },
+          maxWidth: { xs: 150, md: 250 },
+          borderRadius:{md:5},
+        }}
+        alt="The company image"
+        src={image}
+      />
           </Grid>
           <Grid
             item
@@ -79,13 +86,18 @@ export default function JobCard({ id, company, jobtype, time, handleDelete }) {
             xs
           >
             <Grid item>
-              <Typography variant="caption">| {time} | Remote</Typography>
+              <Typography variant="caption"> {salary} | {location}</Typography>
             </Grid>
             <Grid item>
               <Box mt={2}>
+              <Button
+                  variant="outlined"
+                >
+                   <a href={url} target="_blank" >Apply</a>
+                </Button>
                 <Button
                   variant="outlined"
-                  onClick={() => <ViewJob check={true} />}
+                  onClick={handleDeleteClick}
                 >
                   Delete
                 </Button>
