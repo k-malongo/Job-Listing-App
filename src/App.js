@@ -6,6 +6,7 @@ import Header from "./components/header/Header";
 import SearchBar from "./components/searchBar/searchBar";
 import JobCard from "./components/job/JobCard";
 import NewJob from "./components/job/NewJob";
+import { Router, Routes } from "react-router-dom";
 // import Homepage from "./components/homepage/Homepage";
 // import ViewJob from "./components/job/ViewJob";
 export default () => {
@@ -19,17 +20,20 @@ export default () => {
   useEffect(() => {
     fetch(url)
       .then((r) => r.json())
-      .then((data) =>{ setJobs(data)
-      setViewJob(data)
+      .then((data) => {
+        setJobs(data);
+        setViewJob(data);
       });
   }, []);
   function searchFunction(searchValue) {
-    const itemsSearch = viewJob.filter((item) => item.job_type.toLowerCase().includes(searchValue.toLowerCase()) ||
-    item.company.toLowerCase().includes(searchValue.toLowerCase())
+    const itemsSearch = viewJob.filter(
+      (item) =>
+        item.job_type.toLowerCase().includes(searchValue.toLowerCase()) ||
+        item.company.toLowerCase().includes(searchValue.toLowerCase())
     );
-    setJobs(itemsSearch)
-    console.log(jobs)
-}
+    setJobs(itemsSearch);
+    console.log(jobs);
+  }
   function handleAddJob(newJob) {
     setJobs([...jobs, newJob]);
   }
@@ -40,33 +44,39 @@ export default () => {
   return (
     <ThemeProvider theme={theme}>
       <Header openNewJob={() => setOpen(true)} />
-      <NewJob
-        closeJob={() => setOpen(false)}
-        handleAddJob={handleAddJob}
-        urll={url}
-        open={open}
-      />
+      <Router>
+        <Routes>
+          <NewJob
+            closeJob={() => setOpen(false)}
+            handleAddJob={handleAddJob}
+            urll={url}
+            open={open}
+          />
+        </Routes>
         {/* <ViewJob open={check} closeJob={() => setCheck(false)}  /> */}
-      <Grid container justifyContent="center">
-        <Grid item xs={10}>
-          <SearchBar searchFunction={searchFunction} />
-          {jobs.map((jobs) => (
-            <JobCard
-              id={jobs.id}
-              company={jobs.company}
-              key={jobs.id}
-              jobtype={jobs.job_type}
-              skills={jobs.requirement}
-              time={jobs.type}
-              handleDelete={deleteJob}
-              salary = {jobs.salary}
-              location ={jobs.location}
-              url ={jobs.url}
-              image={jobs.image}
-            />
-          ))}
+        <Grid container justifyContent="center">
+          <Grid item xs={10}>
+            <SearchBar searchFunction={searchFunction} />
+            <Routes>
+              {jobs.map((jobs) => (
+                <JobCard
+                  id={jobs.id}
+                  company={jobs.company}
+                  key={jobs.id}
+                  jobtype={jobs.job_type}
+                  skills={jobs.requirement}
+                  time={jobs.type}
+                  handleDelete={deleteJob}
+                  salary={jobs.salary}
+                  location={jobs.location}
+                  url={jobs.url}
+                  image={jobs.image}
+                />
+              ))}
+            </Routes>
+          </Grid>
         </Grid>
-      </Grid>
+      </Router>
     </ThemeProvider>
   );
 };

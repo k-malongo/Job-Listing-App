@@ -26,6 +26,9 @@ export default createTheme({
         fontWeight: 600,
         textTransform: "none",
         color: secondary,
+        '&:hover': {
+          background: "#f1f1f1",
+        },
         padding: "6px 24px",
       },
       outlined: {

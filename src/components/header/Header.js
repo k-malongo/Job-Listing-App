@@ -13,18 +13,14 @@ export default function Header({ openNewJob }) {
               {/* Home */}
             {/* </Typography> */}
             <Typography variant="h5">
-              {/* <NavLink to="/jobs">Open Job Listing</NavLink> */}
-              Open Job Listing
+              <NavLink to="/">Open Job Listing</NavLink>
             </Typography>
-            <Typography variant="h5">
-              {/* <NavLink to="/Testimonials">Testimonials</NavLink> */}
-              Testimonials
+            <Typography variant="h2" color="primary">
+              Find your job Easily
             </Typography>
 
-            <Button onClick={openNewJob} variant="contained" color="primary">
-            {/* <NavLink to="/newjobs">Post job</NavLink> */}
-             
-            Post job
+            <Button onClick={openNewJob} variant="contained" color="primary" >
+            <NavLink to="/newjobs">Post job</NavLink>  
             </Button>
           </Box>
         </Grid>
